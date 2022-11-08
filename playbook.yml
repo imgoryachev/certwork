@@ -1,1 +1,30 @@
 ---
+- name: Builders machine prepare
+  hosts: builders
+  become: yes
+
+  tasks:
+    - name: Ensure docker is present
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Ensure docker is running
+      service:
+        name: docker
+        state: started
+
+- name: Prod machines prepare
+  hosts: prod
+  become: yes
+
+  tasks:
+    - name: Ensure docker is present
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Ensure docker is running
+      service:
+        name: docker
+        state: started
