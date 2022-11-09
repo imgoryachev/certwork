@@ -1,6 +1,6 @@
 ---
 - name: Builders machine prepare
-  hosts: builder
+  hosts: tag_Name_builder
   remote_user: ubuntu
   become: yes
   gather_facts: False
@@ -17,7 +17,7 @@
         state: started
 
 - name: Prod machines prepare
-  hosts: prod
+  hosts: tag_Name_prod
   become: yes
 
   tasks:
