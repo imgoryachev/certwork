@@ -23,6 +23,6 @@ variable "number_of_instances" {
 }
 
 
-variable "ami_key_pair_name" {
+variable "key_name" {
         default = "main-key"
 }
