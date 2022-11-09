@@ -69,6 +69,19 @@ pipeline{
                     }
                 }
             }
+        }
+        stage('pull from awsecr'){
+            environment {
+                DOCKER_HOST="ssh://ubuntu@$(prodServerDnsName)"
+            }
+            steps{
+                sshagent( credentials:["${sshCredsID}"] ) {
+                    withDockerRegistry( [credentialsId:"${registryCredsID}", url:"https://129701213363.dkr.ecr.us-east-1.amazonaws.com}"] ) {
+                        sh "docker pull 129701213363.dkr.ecr.us-east-1.amazonaws.com/cert_work_goryachev:boxfuse"
+                    }
+                    sh "docker run -d -p 8080:8080 129701213363.dkr.ecr.us-east-1.amazonaws.com/cert_work_goryachev:boxfuse"
+                }
+            }
         }    
     }
 }
