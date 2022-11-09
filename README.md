@@ -2,6 +2,7 @@
 
 what is done
 
+```
 \/ create main instance
 \/ install jenkins
 \/ install terraform
@@ -17,3 +18,4 @@ what is done
     \/ start docker on machines
     \/ push docker container to ECR
     \/ pull docker container from ECR
+```
