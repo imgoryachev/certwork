@@ -1,7 +1,9 @@
 ---
 - name: Builders machine prepare
-  hosts: builders
+  hosts: builder
+  remote_user: ubuntu
   become: yes
+  gather_facts: False
 
   tasks:
     - name: Ensure docker is present
