@@ -7,6 +7,7 @@ pipeline{
     environment {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        sshCredsID = 'ssh_key'
     }
     
     stages{
@@ -25,6 +26,16 @@ pipeline{
                 sh 'terraform apply --auto-approve'
             }
         }
+        stage('Ansible playbook'){
+            steps{
+                ansiblePlaybook(
+                    playbook: 'playbook.yml',
+                    inventory: 'aws.yml',
+                    credentialsId: "${sshCredsID}",
+                    disableHostKeyChecking: true,
+                    become: true,
+                )
+            }
+        }
     }
-
 }
